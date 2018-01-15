@@ -1,14 +1,44 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>
-      Ionic Blank
+      CodeAbode_BT
     </ion-title>
+    <ion-buttons right>
+      <button ion-button clear (click)="startScanning()">Scan Device</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+<ion-content class="back" padding>
+
+<ion-list>
+
+ 
+  <h5 *ngIf="gettingDevices">
+     Searching For Devices
+     <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+  </h5>
+  
+
+  <ion-item class="back" *ngFor='let device of unpairedDevices'>
+    <span (click)="selectDevice(device.address)">
+      {{device.name}}
+    </span>
+  </ion-item>
+  
+</ion-list>
+<button ion-button  outline block color="dark"(click)="data()">Start Receiving Data</button>
+<ion-item class="back"  >
+  <p class="fon">
+      {{message}}
   </p>
+    
+  
+</ion-item>
+<ion-fab left bottom>
+  <button ion-fab color="primary" (click)="page()"><ion-icon name="list"></ion-icon></button>
+</ion-fab>
+<ion-fab right bottom>
+    <button ion-fab color="danger" (click)="disconnect()"><ion-icon name="close-circle"></ion-icon></button>
+</ion-fab>
 </ion-content>
